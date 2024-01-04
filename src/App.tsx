@@ -16,12 +16,16 @@ function App() {
    const intervalId=setInterval(() => {
      setCount(count=>count+1);
     }, 1000); 
+    
     return () => clearInterval(intervalId);
   },[]);
 
   return (
+    <>
     <p>count is {count}</p>
-  )
+    <button onClick={() => setCount(0)}>Reset</button>
+    </>
+    )
 }
 
 export default App
