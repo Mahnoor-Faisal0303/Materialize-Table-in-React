@@ -1,34 +1,37 @@
-import { useState,useEffect } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from "react";
 
-function App() {
-  // const [count, setCount] = useState<number>(0)
-  //      setTimeout(() => {
-  //       setCount(count+1);
-  //     }, 1000); 
+import "./App.css";
+
+interface AppPropsType {}
+
+const App: React.FC<AppPropsType> = (props) => {
   
-  
-  //.............................2nd method........................................................................
   const [count, setCount] = useState<number>(0);
   const [paused, setPaused] = useState<string>("resume");
+
   useEffect(() => {
-   const intervalId=setInterval(() => {
-    if(paused==="resume")
-     setCount(count=>count+1);
-    }, 1000); 
+    const intervalId = setInterval(() => {
+      if (paused === "resume") {
+        setCount((count) => count + 1);
+      }
+    }, 1000);
     return () => clearInterval(intervalId);
-  },[paused]);
+  }, [paused]);
 
   return (
-    <>
-    <h1 className="heading">Count is {count}</h1>
-    <button id="resetbtn" onClick={() => setCount(0)}>Reset</button>
-    <button id="resetbtn" onClick={() =>setPaused("pause")}>Pause</button>
-    <button id="resetbtn" onClick={() =>setPaused("resume")}>Resume</button>
-    </>
-    )
-}
+    <React.Fragment>
+      <h1 className="heading">Count is {count}</h1>
+      <button id="resetbtn" onClick={() => setCount(0)}>
+        Reset
+      </button>
+      <button id="resetbtn" onClick={() => setPaused("pause")}>
+        Pause
+      </button>
+      <button id="resetbtn" onClick={() => setPaused("resume")}>
+        Resume
+      </button>
+    </React.Fragment>
+  );
+};
 
-export default App
+export default App;
