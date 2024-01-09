@@ -1,92 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import BasicTable from './App2';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-}
-
-interface TableProps {
-  data: Product[];
-}
-
-const MyComponent: React.FC<TableProps> = ({ data: initialData }) => {
-  const [data, setData] = useState<Product[]>(initialData);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const jsonData: Product[] = await response.json();
-        setData(jsonData);
-        setLoading(false);
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-
-      }
-    };
-
-    fetchData();
-  }, []); 
-  if (loading===true) {
-    return (<React.Fragment> <div className="loader-container" id="loader">
-    <div className="preloader-wrapper big active">
-      <div className="spinner-layer spinner-blue-only">
-        <div className="circle-clipper left">
-          <div className="circle"></div>
-        </div>
-        <div className="gap-patch">
-          <div className="circle"></div>
-        </div>
-        <div className="circle-clipper right">
-          <div className="circle"></div>
-        </div>
-      </div>
-    </div>
-  </div></React.Fragment>
-  )
-
-  }
+const App: React.FC = () => {
+  const data = [
+    { id: 1, name: 'Frozen yoghurt', calories: 159, fat: 6.0, carbs:24, protein:4.3 },
+    { id: 2, name: 'Ice cream sandwich', calories: 237, fat: 9.0, carbs:30, protein:3.76 },
+    { id: 3, name: 'Eclair', calories: 262, fat: 16.0, carbs:37, protein:5.32 },
+    { id: 4, name: 'Cupcake', calories: 305, fat: 3.75, carbs:22, protein:7.23 },
+    { id: 5, name: 'Gingerbread', calories: 356, fat: 16.0, carbs:28, protein:2.3 },  
+  ];
 
   return (
-    <React.Fragment>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-      />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-      />
-
-      <div className="container" id="myContainer">
-     
-    
-        <h1>TABLE</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody id="table-content">
-            {data.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.title}</td>
-                <td>${product.price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </React.Fragment>
+    <div>
+      <h1 id="textStyle">Materialize Table</h1>
+      <BasicTable data={data} />
+    </div>
   );
-}
+};
 
-export default MyComponent;
+export default App;
