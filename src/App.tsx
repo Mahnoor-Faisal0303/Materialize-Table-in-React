@@ -9,7 +9,6 @@ const App: React.FC = () => {
     { id: 4, name: 'Cupcake', calories: 305, fat: 3.75, carbs:22, protein:7.23 },
     { id: 5, name: 'Gingerbread', calories: 356, fat: 16.0, carbs:28, protein:2.3 },  
   ];
-
   return (
     <div>
       <h1 id="textStyle">Materialize Table</h1>

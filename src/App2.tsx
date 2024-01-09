@@ -23,7 +23,7 @@ interface Props {
 const BasicTable: React.FC<Props> = ({ data }) => {
     return (
         <TableContainer id="custom-table-container">
-            <Table aria-label="simple table" id="custom-table">
+            <Table id="custom-table">
                 <TableHead>
                     <TableRow>
                         <TableCell id='fontStyle'>Dessert (100g serving)</TableCell>
