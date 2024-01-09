@@ -1,37 +1,92 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import "./App.css";
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+}
 
-interface AppPropsType {}
+interface TableProps {
+  data: Product[];
+}
 
-const App: React.FC<AppPropsType> = (props) => {
-  
-  const [count, setCount] = useState<number>(0);
-  const [paused, setPaused] = useState<string>("resume");
+const MyComponent: React.FC<TableProps> = ({ data: initialData }) => {
+  const [data, setData] = useState<Product[]>(initialData);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (paused === "resume") {
-        setCount((count) => count + 1);
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products');
+        const jsonData: Product[] = await response.json();
+        setData(jsonData);
+        setLoading(false);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+
       }
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, [paused]);
+    };
+
+    fetchData();
+  }, []); 
+  if (loading===true) {
+    return (<React.Fragment> <div className="loader-container" id="loader">
+    <div className="preloader-wrapper big active">
+      <div className="spinner-layer spinner-blue-only">
+        <div className="circle-clipper left">
+          <div className="circle"></div>
+        </div>
+        <div className="gap-patch">
+          <div className="circle"></div>
+        </div>
+        <div className="circle-clipper right">
+          <div className="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div></React.Fragment>
+  )
+
+  }
 
   return (
     <React.Fragment>
-      <h1 className="heading">Count is {count}</h1>
-      <button id="resetbtn" onClick={() => setCount(0)}>
-        Reset
-      </button>
-      <button id="resetbtn" onClick={() => setPaused("pause")}>
-        Pause
-      </button>
-      <button id="resetbtn" onClick={() => setPaused("resume")}>
-        Resume
-      </button>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      />
+
+      <div className="container" id="myContainer">
+     
+    
+        <h1>TABLE</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody id="table-content">
+            {data.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.title}</td>
+                <td>${product.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </React.Fragment>
   );
-};
+}
 
-export default App;
+export default MyComponent;
