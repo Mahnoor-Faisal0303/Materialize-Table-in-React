@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import CustomTableProps from './TableInterface';
+import CustomTableProps from './ItemInterface';
 
 const CustomTable: React.FC<CustomTableProps> = ({ data }) => {
   return (

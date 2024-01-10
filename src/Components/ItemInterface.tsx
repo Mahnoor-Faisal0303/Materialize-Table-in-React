@@ -1,4 +1,4 @@
-interface Item {
+export interface Item {
   id: number;
   name: string;
   calories: number;
@@ -6,5 +6,7 @@ interface Item {
   carbs: number;
   protein: number;
 }
-
-export default Item;
+interface CustomTableProps {
+  data: Item[];
+}
+export default CustomTableProps;
