@@ -6,7 +6,11 @@ export interface Item {
   carbs: number;
   protein: number;
 }
-interface CustomTableProps {
+
+export interface CustomTableProps {
   data: Item[];
 }
-export default CustomTableProps;
+
+export interface TableHeaderProps extends CustomTableProps {
+  headers: string[];
+}
