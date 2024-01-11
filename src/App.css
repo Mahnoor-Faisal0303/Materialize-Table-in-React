@@ -1,17 +1,6 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0;
-}
-#custom-table {
-  min-width: 850px; 
-}
-#fontStyle{
-  font-weight:bolder;
-}
-#textStyle{
-  text-align: center;
+  padding: 0;
 }
 
 

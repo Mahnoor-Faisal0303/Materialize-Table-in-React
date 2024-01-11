@@ -7,10 +7,7 @@ export interface Item {
   protein: number;
 }
 
-export interface CustomTableProps {
+export interface TableProps {
   data: Item[];
-}
-
-export interface TableHeaderProps extends CustomTableProps {
   headers: string[];
 }
