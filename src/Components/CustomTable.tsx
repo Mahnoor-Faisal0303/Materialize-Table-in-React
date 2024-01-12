@@ -9,18 +9,10 @@ import TablePagination from '@mui/material/TablePagination';
 import { Paper } from '@mui/material';
 import { Typography } from '@mui/material';
 import { TableProps } from './ItemInterface';
+import usePagination from './Pagination';
 
 const CustomTable: React.FC<TableProps> = ({ data, headers }) => {
-
-  const [page, setPage] = React.useState(0);
-  
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage);
-  };
-
+  const { page, handleChangePage } = usePagination();
   return (
     <React.Fragment>
       <TablePagination
