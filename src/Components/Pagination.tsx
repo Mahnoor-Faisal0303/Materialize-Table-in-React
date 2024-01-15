@@ -1,26 +1,25 @@
-import { useState, MouseEvent } from 'react';
+import React from 'react';
+import TablePagination from '@mui/material/TablePagination';
+import {PaginationHookProps} from '../Hooks/useTablePagination';
 
-interface PaginationProps {
-  page: number;
-  handleChangePage: (event: MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
-}
-
-const usePagination = (): PaginationProps => {
-  const [page, setPage] = useState<number>(0);
-
-  const handleChangePage = (
-    event: MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ): void => {
-    if (event) {
-      setPage(newPage);
-    }
-  };
-
-  return {
-    page,
-    handleChangePage,
-  };
+const PaginationComponents: React.FC<PaginationHookProps> = ({ data,page, handleChangePage}) => {
+  return (
+    
+    <React.Fragment>
+      <TablePagination
+        component="div"
+        count={data.length}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={10}
+        rowsPerPageOptions={[10]}
+      />
+      </React.Fragment>
+    
+  );
 };
 
-export default usePagination;
+export default PaginationComponents;
+
+
+
