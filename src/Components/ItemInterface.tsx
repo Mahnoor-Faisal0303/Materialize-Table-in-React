@@ -11,6 +11,3 @@ export interface TableProps {
   data: Item[];
   headers: string[];
 }
-export interface PaginationProps {
-  data: Item[];
-}

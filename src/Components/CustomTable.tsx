@@ -10,14 +10,29 @@ import { Typography } from '@mui/material';
 import { TableProps } from './ItemInterface';
 import usePagination from '../Hooks/useTablePagination';
 import PaginationComponents from './Pagination';
+import TextField from '@mui/material/TextField';
+import { useState } from 'react';
 
 const CustomTable: React.FC<TableProps> = ({ data, headers }) => {
-  const { page, handleChangePage } = usePagination(); //state lift up
-  const   searchStr = 'berry';
-  const filterData = data.filter( row=>row.name.includes(searchStr));
+  const { page, handleChangePage } = usePagination(); //state lift up 
+
+  const [searchStr, setSearchStr] = useState('');
+  const filterData = data.filter((row) => row.name.includes(searchStr));
+  console.log(searchStr);
+
   return (
     <React.Fragment>
+      <TextField 
+        id="standard-basic" 
+        label="Search Dessert" 
+        variant="standard"
+        value={searchStr} 
+        onChange={(e) => setSearchStr(e.target.value)}
+        sx={{ margin: '20px' }} />
+
+
       <PaginationComponents data={filterData} page={page} handleChangePage={handleChangePage} />
+
       <Typography variant="h2"
         sx={{ textAlign: 'center', marginTop: '30px', fontFamily: 'poppins' }}>
         Materialize Table
