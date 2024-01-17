@@ -17,7 +17,7 @@ const PaginationComponents: React.FC<PaginationProps> = ({ data, page, handleCha
         count={data.length}
         page={page}
         onPageChange={handleChangePage}
-        rowsPerPage={10}
+        rowsPerPage={5}
         rowsPerPageOptions={[10]}
       />
     </React.Fragment>

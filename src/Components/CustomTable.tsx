@@ -4,7 +4,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-//import { Paper } from '@mui/material';
 import { TableProps } from '../Interfaces/ItemInterface';
 import usePagination from '../Hooks/useTablePagination';
 import PaginationComponents from './Pagination';
@@ -18,7 +17,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
     <React.Fragment>
       <TextFieldStyle
         id="standard-basic"
-        label="Search Dessert"
+        label="Search By Name"
         variant="standard"
         value={searchStr}
         onChange={(e) => {
@@ -43,19 +42,13 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
             </TableRowStyle>
           </TableHead>
           <TableBody>
-            {filterData
-              .slice(page * 10, page * 10 + 10)
-              .map((item) => {
-                return (
-                  <TableRow key={item.id}>
-                    <TableCell key={'name' + item.id}>{item.name}</TableCell>
-                    <TableCell key={'calories' + item.id}>{item.calories}</TableCell>
-                    <TableCell key={'fat' + item.id}>{item.fat}</TableCell>
-                    <TableCell key={'carbs' + item.id}>{item.carbs}</TableCell>
-                    <TableCell key={'protein' + item.id}>{item.protein}</TableCell>
-                  </TableRow>
-                );
-              })}
+            {filterData.slice(page * 5, page * 5 + 5).map((Data) => (
+              <TableRow key={Data.id}>
+                {Object.keys(Data).map((key) => (
+                  <TableCell key={key}>{Data[key]}</TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainerStyle>

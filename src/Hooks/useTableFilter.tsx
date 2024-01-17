@@ -10,7 +10,7 @@ interface PaginationHookProps {
 
 const useTableFilter = ():PaginationHookProps => {
     const [searchStr, setSearchStr] = useState<string>('');
-    const filterData = data.filter((row) => row.name.includes(searchStr));
+    const filterData = data.filter((row) => row.animalName.includes(searchStr));
     return {
         filterData,
         searchStr,

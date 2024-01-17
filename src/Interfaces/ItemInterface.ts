@@ -1,13 +1,7 @@
 export interface Item {
-  id: number;
-  name: string;
-  calories: number;
-  fat: number;
-  carbs: number;
-  protein: number;
+  [key: string]: number | string;
 }
-
-export interface TableProps {
-  data: Item[];
-  headers: string[];
-}
+ export interface TableProps {
+    data:Item[];
+    headers: string[];
+  }
