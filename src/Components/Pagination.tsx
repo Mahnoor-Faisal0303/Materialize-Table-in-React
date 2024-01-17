@@ -1,10 +1,16 @@
 import React from 'react';
 import TablePagination from '@mui/material/TablePagination';
-import { PaginationHookProps } from '../Hooks/useTablePagination';
+import { MouseEvent } from 'react';
+import { Item } from "../Interfaces/ItemInterface";
 
-const PaginationComponents: React.FC<PaginationHookProps> = ({ data, page, handleChangePage }) => {
+interface PaginationProps {
+  data: Item[];
+  page: number;
+  handleChangePage: (event: MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
+}
+
+const PaginationComponents: React.FC<PaginationProps> = ({ data, page, handleChangePage}) => {
   return (
-
     <React.Fragment>
       <TablePagination
         component="div"
@@ -15,7 +21,6 @@ const PaginationComponents: React.FC<PaginationHookProps> = ({ data, page, handl
         rowsPerPageOptions={[10]}
       />
     </React.Fragment>
-
   );
 };
 

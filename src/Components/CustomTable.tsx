@@ -2,53 +2,45 @@ import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Paper } from '@mui/material';
-import { Typography } from '@mui/material';
-import { TableProps } from './ItemInterface';
+//import { Paper } from '@mui/material';
+import { TableProps } from '../Interfaces/ItemInterface';
 import usePagination from '../Hooks/useTablePagination';
 import PaginationComponents from './Pagination';
-import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import useTableFilter from '../Hooks/useTableFilter';
+import { TextFieldStyle, TypographyStyle, TableContainerStyle, TableRowStyle, TableCellStyle } from './Style';
 
-const CustomTable: React.FC<TableProps> = ({ data, headers }) => {
-  const { page, handleChangePage } = usePagination(); //state lift up 
-
-  const [searchStr, setSearchStr] = useState('');
-  const filterData = data.filter((row) => row.name.includes(searchStr));
-  console.log(searchStr);
-
+const CustomTable: React.FC<TableProps> = ({ headers }) => {
+  const { page, handleChangePage, setCurrentPage } = usePagination();
+  const { filterData, searchStr, setSearchStr } = useTableFilter();
   return (
     <React.Fragment>
-      <TextField 
-        id="standard-basic" 
-        label="Search Dessert" 
+      <TextFieldStyle
+        id="standard-basic"
+        label="Search Dessert"
         variant="standard"
-        value={searchStr} 
-        onChange={(e) => setSearchStr(e.target.value)}
-        sx={{ margin: '20px' }} />
-
-
-      <PaginationComponents data={filterData} page={page} handleChangePage={handleChangePage} />
-
-      <Typography variant="h2"
-        sx={{ textAlign: 'center', marginTop: '30px', fontFamily: 'poppins' }}>
+        value={searchStr}
+        onChange={(e) => {
+          setSearchStr(e.target.value);
+          setCurrentPage(0);
+        }}>
+      </TextFieldStyle>
+      <PaginationComponents
+        data={filterData} page={page} handleChangePage={handleChangePage} />
+      <TypographyStyle variant="h2">
         Materialize Table
-      </Typography>
-      <TableContainer component={Paper}
-        sx={{ display: 'flex', justifyContent: 'center', width: '850px', margin: 'auto', padding: "30px" }}>
+      </TypographyStyle>
+      <TableContainerStyle>
         <Table>
           <TableHead>
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            <TableRowStyle>
               {headers.map((header) => (
-                <TableCell key={header} sx={{ fontWeight: 'bold' }}>
+                <TableCellStyle key={header}>
                   {header}
-                </TableCell>
+                </TableCellStyle>
               ))}
-            </TableRow>
+            </TableRowStyle>
           </TableHead>
           <TableBody>
             {filterData
@@ -66,9 +58,8 @@ const CustomTable: React.FC<TableProps> = ({ data, headers }) => {
               })}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainerStyle>
     </React.Fragment>
   );
 };
-
 export default CustomTable;

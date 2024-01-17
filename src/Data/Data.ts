@@ -1,4 +1,4 @@
-import { Item } from "./ItemInterface";
+import { Item } from "../Interfaces/ItemInterface";
 
 export const data: Item[] = [
     { id: 1, name: 'Frozen yoghurt', calories: 159, fat: 6.0, carbs: 24, protein: 4.3 },
