@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomTable from './Components/CustomTable';
 import './App.css';
-import { data, headers } from './Components/Data';
+import { data, headers } from './Data/Data';
 const App: React.FC = () => {
   return (
     <div>

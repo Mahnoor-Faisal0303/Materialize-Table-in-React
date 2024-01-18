@@ -1,52 +1,64 @@
-import React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { Paper } from '@mui/material';
-import { Typography } from '@mui/material';
-import { TableProps } from './ItemInterface';
+import React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { TableProps } from "../Interfaces/ItemInterface";
+import usePagination from "../Hooks/useTablePagination";
+import PaginationComponents from "./Pagination";
+import useTableFilter from "../Hooks/useTableFilter";
+import {
+    TextFieldStyle,
+    TypographyStyle,
+    TableContainerStyle,
+    TableRowStyle,
+    TableCellStyle
+} from "./Style";
 
-const CustomTable: React.FC<TableProps> = ({ data, headers }) => {
-  return (
-    <React.Fragment>
-      <Typography variant="h2"
-        sx={{ textAlign: 'center', marginTop: '30px', fontFamily: 'poppins' }}>
-        Materialize Table
-      </Typography>
-      <TableContainer component={Paper}
-        sx={{ display: 'flex', justifyContent: 'center', width: '850px', margin: 'auto', padding: "30px" }}>
-        <Table aria-aria-label='simple table'>
-          <TableHead>
-            <TableRow
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              {headers.map((header) => (
-                <TableCell key={header} sx={{ fontWeight: 'bold' }}>
-                  {header}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((item) => {
-              console.log('Item ID:', item.id);
-              return (
-                <TableRow key={item.id}>
-                  <TableCell key={'name' + item.id}>{item.name}</TableCell>
-                  <TableCell key={'calories' + item.id}>{item.calories}</TableCell>
-                  <TableCell key={'fat' + item.id}>{item.fat}</TableCell>
-                  <TableCell key={'carbs' + item.id}>{item.carbs}</TableCell>
-                  <TableCell key={'protein' + item.id}>{item.protein}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </React.Fragment>
-  );
+const CustomTable: React.FC<TableProps> = ({ headers }) => {
+    const { page, handleChangePage, setCurrentPage } = usePagination();
+    const { filterData, searchStr, setSearchStr } = useTableFilter();
+
+    return (
+        <React.Fragment>
+            <TextFieldStyle
+                id="standard-basic"
+                label="Search By Name"
+                variant="standard"
+                value={searchStr}
+                onChange={(e) => {
+                    setSearchStr(e.target.value);
+                    setCurrentPage(0);
+                }}
+            ></TextFieldStyle>
+            <PaginationComponents
+                data={filterData}
+                page={page}
+                handleChangePage={handleChangePage}
+            />
+            <TypographyStyle variant="h2">Materialize Table</TypographyStyle>
+            <TableContainerStyle>
+                <Table>
+                    <TableHead>
+                        <TableRowStyle>
+                            {headers.map((header) => (
+                                <TableCellStyle key={header}>{header}</TableCellStyle>
+                            ))}
+                        </TableRowStyle>
+                    </TableHead>
+                    <TableBody>
+                        {filterData.slice(page * 5, page * 5 + 5).map((Data) => (
+                            <TableRow key={Data.id}>
+                                {Object.keys(Data).map((key) => (
+                                    <TableCell key={key}>{Data[key]}</TableCell>
+                                ))}
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainerStyle>
+        </React.Fragment>
+    );
 };
-
 export default CustomTable;
