@@ -20,9 +20,9 @@ import {
 
 const CustomTable: React.FC<TableProps> = ({ headers }) => {
     const { page, handleChangePage, setCurrentPage } = usePagination();
-    const { filterData, searchStr, setSearchStr } = useTableFilter();  
+    const { filterData, searchStr, setSearchStr } = useTableFilter();
     const navigate = useNavigate();
-    
+
     return (
         <React.Fragment>
             <TextFieldStyle
