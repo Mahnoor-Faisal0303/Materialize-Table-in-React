@@ -17,6 +17,8 @@ import {
     TableCellStyle,
     ButtonStyle
 } from "./Style";
+import {generatePath} from './GeneratePath'
+import APP_ROUTES from "../Constant/Routes";
 
 const CustomTable: React.FC<TableProps> = ({ headers }) => {
     const { page, handleChangePage, setCurrentPage } = usePagination();
@@ -40,7 +42,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                 page={page}
                 handleChangePage={handleChangePage}
             />
-            <TypographyStyle variant="h2">Materialize Table</TypographyStyle>
+            <TypographyStyle variant="h2">Table</TypographyStyle>
             <TableContainerStyle>
                 <Table>
                     <TableHead>
@@ -56,7 +58,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                                 {Object.keys(Data).map((key) => (
                                     <TableCell key={key}>{Data[key]}</TableCell>
                                 ))}
-                                <ButtonStyle onClick={() => navigate('details/' + Data.id)}>Description</ButtonStyle>
+                                <ButtonStyle onClick={() => navigate(generatePath(APP_ROUTES.DETAILS_PAGE,Data.id))}>Description</ButtonStyle>
                             </TableRow>
                         ))}
                     </TableBody>
