@@ -8,18 +8,21 @@ import { TableProps } from "../Interfaces/ItemInterface";
 import usePagination from "../Hooks/useTablePagination";
 import PaginationComponents from "./Pagination";
 import useTableFilter from "../Hooks/useTableFilter";
+import { useNavigate } from "react-router-dom";
 import {
     TextFieldStyle,
     TypographyStyle,
     TableContainerStyle,
     TableRowStyle,
-    TableCellStyle
+    TableCellStyle,
+    ButtonStyle
 } from "./Style";
 
 const CustomTable: React.FC<TableProps> = ({ headers }) => {
     const { page, handleChangePage, setCurrentPage } = usePagination();
-    const { filterData, searchStr, setSearchStr } = useTableFilter();
-
+    const { filterData, searchStr, setSearchStr } = useTableFilter();  
+    const navigate = useNavigate();
+    
     return (
         <React.Fragment>
             <TextFieldStyle
@@ -53,6 +56,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                                 {Object.keys(Data).map((key) => (
                                     <TableCell key={key}>{Data[key]}</TableCell>
                                 ))}
+                                <ButtonStyle onClick={() => navigate('details/' + Data.id)}>Description</ButtonStyle>
                             </TableRow>
                         ))}
                     </TableBody>
