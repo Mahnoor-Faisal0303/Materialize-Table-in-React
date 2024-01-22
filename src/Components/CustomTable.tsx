@@ -58,7 +58,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                                 {Object.keys(Data).map((key) => (
                                     <TableCell key={key}>{Data[key]}</TableCell>
                                 ))}
-                                <ButtonStyle onClick={() => navigate(generatePath(APP_ROUTES.DETAILS_PAGE,Data.id))}>Description</ButtonStyle>
+                                <ButtonStyle onClick={() => navigate(generatePath(APP_ROUTES.DETAILS_PAGE,{id:Data.id}))}>Description</ButtonStyle>
                             </TableRow>
                         ))}
                     </TableBody>
