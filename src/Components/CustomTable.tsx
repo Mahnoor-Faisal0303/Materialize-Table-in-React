@@ -8,17 +8,22 @@ import { TableProps } from "../Interfaces/ItemInterface";
 import usePagination from "../Hooks/useTablePagination";
 import PaginationComponents from "./Pagination";
 import useTableFilter from "../Hooks/useTableFilter";
+import { useNavigate } from "react-router-dom";
 import {
     TextFieldStyle,
     TypographyStyle,
     TableContainerStyle,
     TableRowStyle,
-    TableCellStyle
+    TableCellStyle,
+    ButtonStyle
 } from "./Style";
+import {generatePath} from './GeneratePath'
+import APP_ROUTES from "../Constant/Routes";
 
 const CustomTable: React.FC<TableProps> = ({ headers }) => {
     const { page, handleChangePage, setCurrentPage } = usePagination();
     const { filterData, searchStr, setSearchStr } = useTableFilter();
+    const navigate = useNavigate();
 
     return (
         <React.Fragment>
@@ -37,7 +42,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                 page={page}
                 handleChangePage={handleChangePage}
             />
-            <TypographyStyle variant="h2">Materialize Table</TypographyStyle>
+            <TypographyStyle variant="h2">Table</TypographyStyle>
             <TableContainerStyle>
                 <Table>
                     <TableHead>
@@ -53,6 +58,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                                 {Object.keys(Data).map((key) => (
                                     <TableCell key={key}>{Data[key]}</TableCell>
                                 ))}
+                                <ButtonStyle onClick={() => navigate(generatePath(APP_ROUTES.DETAILS_PAGE,{id:Data.id}))}>Description</ButtonStyle>
                             </TableRow>
                         ))}
                     </TableBody>

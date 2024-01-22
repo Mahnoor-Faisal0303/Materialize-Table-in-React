@@ -4,6 +4,7 @@ import TableRow from "@mui/material/TableRow";
 import { Typography } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import TableCell from "@mui/material/TableCell";
+import Button from '@mui/material/Button';
 
 export const TextFieldStyle = styled(TextField)({
     margin: 20
@@ -12,6 +13,15 @@ export const TypographyStyle = styled(Typography)({
     textAlign: "center",
     marginTop: "30px",
     fontFamily: "poppins"
+});
+export const TypographyStyle2 = styled(Typography)({
+    textAlign: "center",
+    marginTop: "50px",
+    fontFamily: "poppins",
+    fontSize: "30px",
+    border: "2px solid gray",
+    marginLeft:"290px",
+    marginRight:"290px"
 });
 export const TableContainerStyle = styled(TableContainer)({
     display: "flex",
@@ -32,3 +42,7 @@ export const PageNumberStyle = styled("div")({
     fontWeight: "bold",
     marginLeft: "1284px"
 });
+export const ButtonStyle = styled(Button)({
+    color :"black",
+    backgroundColor:"gray",
+})
