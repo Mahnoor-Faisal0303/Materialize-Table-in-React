@@ -46,3 +46,6 @@ export const ButtonStyle = styled(Button)({
     color :"black",
     backgroundColor:"gray",
 })
+export const LocalizationProviderStyle = styled ("div")({
+   marginLeft:"20px",
+})

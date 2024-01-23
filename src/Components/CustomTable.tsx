@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,13 +17,19 @@ import {
     TableCellStyle,
     ButtonStyle
 } from "./Style";
-import {generatePath} from './GeneratePath'
+import { generatePath } from './GeneratePath'
 import APP_ROUTES from "../Constant/Routes";
+
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProviderStyle } from "./Style";
 
 const CustomTable: React.FC<TableProps> = ({ headers }) => {
     const { page, handleChangePage, setCurrentPage } = usePagination();
     const { filterData, searchStr, setSearchStr } = useTableFilter();
     const navigate = useNavigate();
+    const [searchDate, setSearchDate] = useState<Date | null>(null);
 
     return (
         <React.Fragment>
@@ -32,11 +38,22 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                 label="Search By Name"
                 variant="standard"
                 value={searchStr}
-                onChange={(e) => {
+                onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {
                     setSearchStr(e.target.value);
                     setCurrentPage(0);
                 }}
             ></TextFieldStyle>
+
+            <LocalizationProviderStyle>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker value={searchDate}
+                        onChange={(date) => {
+                            setSearchDate(date);
+                            setCurrentPage(0);
+                        }} />
+                </LocalizationProvider>
+            </LocalizationProviderStyle>
+
             <PaginationComponents
                 data={filterData}
                 page={page}
@@ -53,14 +70,30 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                         </TableRowStyle>
                     </TableHead>
                     <TableBody>
-                        {filterData.slice(page * 5, page * 5 + 5).map((Data) => (
-                            <TableRow key={Data.id}>
-                                {Object.keys(Data).map((key) => (
-                                    <TableCell key={key}>{Data[key]}</TableCell>
-                                ))}
-                                <ButtonStyle onClick={() => navigate(generatePath(APP_ROUTES.DETAILS_PAGE,{id:Data.id}))}>Description</ButtonStyle>
-                            </TableRow>
-                        ))}
+                        {filterData
+                            .filter((item) => {
+                                if (searchDate) {
+                                    const selectedDateFormatted = new Date(item.date);
+                                    const selectedDate = new Date(searchDate);
+                                    return (
+                                        selectedDateFormatted.getDate() === selectedDate.getDate() &&
+                                        selectedDate.getMonth() === selectedDateFormatted.getMonth() &&
+                                        selectedDate.getFullYear() === selectedDateFormatted.getFullYear()
+                                    );
+                                }
+                                else {
+                                    return true;
+                                }
+                            })
+
+                            .slice(page * 5, page * 5 + 5).map((Data) => (
+                                <TableRow key={Data.id}>
+                                    {Object.keys(Data).map((key) => (
+                                        <TableCell key={key}>{Data[key]}</TableCell>
+                                    ))}
+                                    <ButtonStyle onClick={() => navigate(generatePath(APP_ROUTES.DETAILS_PAGE, { id: Data.id }))}>Description</ButtonStyle>
+                                </TableRow>
+                            ))}
                     </TableBody>
                 </Table>
             </TableContainerStyle>
