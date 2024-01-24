@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import TableCell from "@mui/material/TableCell";
 import Button from '@mui/material/Button';
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 export const TextFieldStyle = styled(TextField)({
     margin: 20
@@ -46,6 +47,6 @@ export const ButtonStyle = styled(Button)({
     color :"black",
     backgroundColor:"gray",
 })
-export const LocalizationProviderStyle = styled ("div")({
-   marginLeft:"20px",
+export const LocalizationProviderStyle = styled (LocalizationProvider)({
+    margin: "20px",
 })
