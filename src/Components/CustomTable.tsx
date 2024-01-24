@@ -30,7 +30,7 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
     const { filterData, searchStr, setSearchStr } = useTableFilter();
     const navigate = useNavigate();
     const [searchDate, setSearchDate] = useState<Date | null>(null);
-
+    
     return (
         <React.Fragment>
             <TextFieldStyle
@@ -71,12 +71,13 @@ const CustomTable: React.FC<TableProps> = ({ headers }) => {
                     </TableHead>
                     <TableBody>
                         {filterData
+
                             .filter((item) => {
                                 if (searchDate) {
-                                    const selectedDateFormatted = new Date(item.date);
+                                    const selectedDateFormatted = new Date(Number(item.date) * 1000);
                                     const selectedDate = new Date(searchDate);
                                     return (
-                                        selectedDateFormatted.getDate() === selectedDate.getDate() &&
+                                        selectedDate.getDate() === selectedDateFormatted.getDate() &&
                                         selectedDate.getMonth() === selectedDateFormatted.getMonth() &&
                                         selectedDate.getFullYear() === selectedDateFormatted.getFullYear()
                                     );

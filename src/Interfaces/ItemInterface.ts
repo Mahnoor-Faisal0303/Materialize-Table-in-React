@@ -1,5 +1,5 @@
 export interface Item {
-    [key: string]: number | string;
+    [key: string]: number | string ;
     id:number;
     name:string;
 }
