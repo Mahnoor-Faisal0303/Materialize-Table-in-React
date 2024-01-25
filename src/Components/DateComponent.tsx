@@ -3,13 +3,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProviderStyle } from "./Style";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-interface DatePickerComponentProps {
+interface DateComponentProps {
   searchDate: Date | null;
   setSearchDate: React.Dispatch<React.SetStateAction<Date | null>>;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPage: (newPage: number) => void;
 }
 
-const DatePickerComponent: React.FC<DatePickerComponentProps> = ({searchDate,setSearchDate,setCurrentPage}) => {
+const DateComponent: React.FC<DateComponentProps> = ({searchDate,setSearchDate,setCurrentPage}) => {
   return (
     <div>
       <LocalizationProviderStyle dateAdapter={AdapterDayjs}>
@@ -25,6 +25,6 @@ const DatePickerComponent: React.FC<DatePickerComponentProps> = ({searchDate,set
   );
 };
 
-export default DatePickerComponent;
+export default DateComponent;
 
   
