@@ -1,6 +1,6 @@
-import React  from "react";
+import React from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProviderStyle } from "./Style";
+import { LocalizationProviderStyle, BoxStyle } from "./Style";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 interface DateComponentProps {
@@ -9,9 +9,9 @@ interface DateComponentProps {
   setCurrentPage: (newPage: number) => void;
 }
 
-const DateComponent: React.FC<DateComponentProps> = ({searchDate,setSearchDate,setCurrentPage}) => {
+const DateComponent: React.FC<DateComponentProps> = ({ searchDate, setSearchDate, setCurrentPage }) => {
   return (
-    <div>
+    <BoxStyle>
       <LocalizationProviderStyle dateAdapter={AdapterDayjs}>
         <DatePicker
           value={searchDate}
@@ -21,10 +21,10 @@ const DateComponent: React.FC<DateComponentProps> = ({searchDate,setSearchDate,s
           }}
         />
       </LocalizationProviderStyle>
-    </div>
+    </BoxStyle>
   );
 };
 
 export default DateComponent;
 
-  
+

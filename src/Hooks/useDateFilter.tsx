@@ -16,7 +16,8 @@ export const filterAndSliceData = (
             selectedDate.getMonth() === selectedDateFormatted.getMonth() &&
             selectedDate.getFullYear() === selectedDateFormatted.getFullYear()
           );
-        } else {
+        }
+         else {
           return true;
         }
       })

@@ -1,14 +1,14 @@
 import { styled } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import TableRow from "@mui/material/TableRow";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import TableCell from "@mui/material/TableCell";
 import Button from '@mui/material/Button';
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 export const TextFieldStyle = styled(TextField)({
-    margin: 20
+    margin: "20px",
 });
 export const TypographyStyle = styled(Typography)({
     textAlign: "center",
@@ -39,7 +39,7 @@ export const TableRowStyle = styled(TableRow)({
 export const TableCellStyle = styled(TableCell)({
     fontWeight: "bold"
 });
-export const PageNumberStyle = styled("div")({
+export const PageNumberStyle = styled(Box)({
     fontWeight: "bold",
     marginLeft: "1284px"
 });
@@ -48,5 +48,7 @@ export const ButtonStyle = styled(Button)({
     backgroundColor:"gray",
 })
 export const LocalizationProviderStyle = styled (LocalizationProvider)({
-    margin: "20px",
+})
+export const BoxStyle = styled (Box)({
+    marginLeft:"20px"
 })

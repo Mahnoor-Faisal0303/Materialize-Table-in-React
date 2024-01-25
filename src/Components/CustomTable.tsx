@@ -37,7 +37,8 @@ export const CustomTableComponent: React.FC<CustomTableProps> = ({ headers, body
                         .map((item) => (
                             <TableRow key={item.id}>
                                 {Object.keys(item).map((key) => (
-                                    <TableCell key={key}>{item[key]}</TableCell>
+                                     <TableCell key={key}>{item[key]}
+                                     </TableCell>
                                 ))}
                                 <ButtonStyle
                                     onClick={() =>
